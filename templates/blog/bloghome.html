@@ -1,0 +1,67 @@
+{% extends '../base/base.html' %}
+{% load static %}
+{% block title %}ব্লগ{% endblock title %}
+{% block main_content %}
+    <div class="row">
+        <div class="col-md-9">
+            <h3 class="text-success text-center">ব্লগ পোষ্ট</h3><hr>
+            <div class="row">
+                {% if warning %}
+                    <h5 class="text-primary text-center">{{ warning }}</h5>
+                {% elif single %}
+                    <div class="text-center col-sm-12">
+                        <h4 class="text-success">{{ post.post_title }}</h4><hr>
+                    </div>
+                    <div class="text-center col-sm-12" style="margin:15 auto;">
+                        <img class="img img-fluid" src="{{ MEDIA_URL }}{{ post.bannar_img.url }}" alt="{{ MEDIA_URL }}{{ post.bannar_img.url }}"><br>
+                    </div>
+                    <div class="col-sm-12">
+                        {{ post.post_details | safe }}
+                        <p><span class="text-success">পোষ্টটি লিখেছেনঃ </span>{{ post.post_author }}<span style="float: right;"><span class="text-success">প্রকাশের তারিখঃ </span>{{ post.pub_date }}</span></p>
+                    </div>
+                {% else %}
+                    {% for post in all_posts %}
+                    <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="card mycard">
+                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}{{ post.bannar_img.url }}" alt="{{ MEDIA_URL }}{{ post.bannar_img.url }}" style="height:160px;">
+                            <div class="card-body text-center">
+                                <h4 class="card-title text-success" style="background-color: #f1f1f1;  padding: 8px;">{{ post.post_title }}</h4>
+                                <p class="card-text">{{ post.post_details | safe }}</p>
+                                <a href="/blog/{{ post.pk }}/" class="btn btn-success">বিস্তারিত পড়ুন</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Right side -->
+        <div class="col-md-3">
+            <h3 class="text-success text-center">অনুসন্ধান করুন</h3><hr>
+            <form class="form-inline" action="/blog/" method="post">
+                {% csrf_token %}
+                <div class="input-group center-align">
+                    <input id="search" type="text" class="form-control" size="50" placeholder="অনুসন্ধান করুন" name="search" required>
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn btn-success">অনুসন্ধান</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Most recent posts -->
+            <div class="card">
+                <div class="card-body text-center">
+                    <h4 class="card-title text-success" style="background-color: #f1f1f1;  padding: 8px;">সাম্প্রতিক পোষ্টসমূহ</h4>
+                    <div class="list-group">
+                        {% for post in recent_posts %}
+                        <a href="/blog/{{ post.pk }}" class="list-group-item text-success bg-light">{{ post.post_title }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ad code here -->
+        </div>
+    </div>
+{% endblock main_content %}

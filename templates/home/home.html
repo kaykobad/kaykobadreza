@@ -1,0 +1,74 @@
+{% extends "../base/base.html" %}
+{% block title %}কায়কোবাদের ব্লগ{% endblock title %}
+{% load static %}
+{% block main_content %}
+    <div class="row">
+        <div class="jumbotron text-center col-sm-12">
+            <h1>কায়কোবাদ এর ব্লগ</h1> 
+            <p>প্রোগ্রামিং এর মুক্ত পাঠশালা।</p> 
+            <form class="form-inline" action="/home/" method="post">
+                {% csrf_token %}
+                <div class="input-group center-align">
+                    <input id="mail" type="email" class="form-control" size="50" placeholder="name@example.com" name="subscriber_mail" onchange="ValidateEmail()" required>
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn btn-success" onclick="ValidateEmail()">Subscribe</button>
+                    </div>
+                </div>
+            </form>
+            {% if message %}
+                <span id="warning" style="color: white;">{{ message }}</span>
+            {% endif %}
+        </div>
+
+        <!-- Tutorials -->
+        <div id="tutorials" class="container-fluid">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h2 class="home-h">প্রোগ্রামিং টিউটোরিয়াল</h2><br>
+                    <h4 class="home-h4">ডাটা স্ট্রাকচার, অ্যালগরিদম, ওয়েব ডেভেলপমেন্ট ও প্রোগ্রামিং ল্যাঙ্গুয়েজ</h4><br>
+                    <p>শিখতে চাও ডাটা স্ট্রাকচার বা অ্যালগরিদম? কিংবা হতে চাও ওয়েব ডেভেলপের? নাকি শিখতে চাও তোমার পছন্দের প্রোগ্রামিং ল্যাঙ্গুয়েজ?
+                        এই সবকিছুই এখন এক জায়গাতেই!! ঘুরে আসো আমাদের টিউটোরিয়াল লাইব্রেরী থেকে। অনেক কোর্স থেকে বেছে নাও নিজের পছন্দের
+                        কোর্স। শিখতে থাক নিজের ইচ্ছামত।
+                    </p>
+                    <br><a href="/tutorials/" class="btn btn-success btn-lg">টিউটোরিয়াল লাইব্রেরী</a>
+                </div>
+                <div class="col-sm-4 img-center">
+                    <img src="{% static "assets/images/home/tutorial.png" %}" alt="tutorial">
+                </div>
+            </div>
+        </div>
+
+        <!-- Blog -->
+        <div id="blog" class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4 img-center">
+                    <img src="{% static "assets/images/home/blog2.png" %}" alt="tutorial">
+                </div>
+                <div class="col-sm-8">
+                    <h2 class="home-h">প্রোগ্রামিং ব্লগ</h2><br>
+                    <h4 class="home-h4">প্রোগ্রামিং এর খুঁটিনাটি</h4><br>
+                    <p>বিভিন্ন ছোটখাট বা মাঝারি প্রোগ্রামিং বিষয় নিয়ে সাজানো হয়েছে এই ব্লগ। প্রোগ্রামিং এর খুঁটিনাটি বিষয়গুলো জানতে এখনই ঘুরে আস আমার ব্লগ থেকে। 
+                    </p>
+                    <br><a href="/blog/" class="btn btn-success btn-lg">প্রোগ্রামিং ব্লগ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question Answer -->
+        <div id="question" class="container-fluid">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h2 class="home-h">প্রশ্ন কিংবা মতামত</h2><br>
+                    <h4 class="home-h4">তোমাদের প্রশ্ন বা মতামত জানাও আমাকে</h4><br>
+                    <p>তোমার মনে কি ঘুরে বেড়ায় হাজারটা প্রশ্ন? কিংবা আমার ব্লগ কিংবা টিউটোরিয়াল নিয়ে জানাতে চাও তোমাদের মতামত?
+                        তাহলে আর দেরি কেন? তোমার প্রশ্ন কিংবা মতামত পাঠিয়ে দাও আমার কাছে!!
+                    </p>
+                    <br><a href="/questions/" class="btn btn-success btn-lg">প্রশ্ন কিংবা মতামত</a>
+                </div>
+                <div class="col-sm-4 img-center">
+                    <img src="{% static "assets/images/home/q2.png" %}" alt="tutorial">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock main_content %}

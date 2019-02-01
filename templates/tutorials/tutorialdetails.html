@@ -1,0 +1,63 @@
+{% extends "../base/base.html" %}
+{% load static %}
+{% block title %}{{ language }}{% endblock title %}
+{% block main_content %}
+    <div class="row">
+        <div class="tut-header text-center col-sm-12">
+            <h1>{{ language }} টিউটোরিয়াল</h1> <!-- Replace -->
+            <p>{{ slogan }}</p> <!-- Replace -->
+        </div>
+    </div>
+
+    <!-- Details goes here -->
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Sidebar -->
+            <hr>
+            <h4 class="text-success text-center">Index</h4><hr>
+            <div class="vertical-menu">
+                {% for chapter in index %}
+                    {% if chapter.chapter_no == post.chapter_no %}
+                        <a href="/tutorials/{{ name }}/{{ chapter.chapter_no }}" class="active">{{ chapter.chapter_name }}</a>
+                    {% else %}
+                        <a href="/tutorials/{{ name }}/{{ chapter.chapter_no }}">{{ chapter.chapter_name }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- CONTENT -->
+            <hr>
+            {% if message %}
+                <h5 class="text-success text-center">দুঃখিত!</h5>
+            {% else %}
+                <h4 class="text-success text-center">{{ post.chapter_name }}</h4>
+            {% endif %}
+            <hr>
+            <br>
+            <div class="row" id="tutorial-details">
+                {% if message %}
+                    <h5 class="text-success text-center" style="margin: auto;">{{ message }}</h5>
+                {% else %}
+                {{ post.details | safe }}
+                {% endif %}
+            </div>
+            <div class="row">
+                <div id="bottom-btn" style="width: 100%; float: right;">
+                    <hr>
+                    <a href="/tutorials/{{ name }}/{{ prev }}/" class="btn btn-success"><img src="{% static "assets/images/glyphicons_free/glyphicons/png/glyphicons-217-circle-arrow-left.png" %}" alt="prev"> Previous</a>
+                    <a href="/tutorials/{{ name }}/{{ next }}/" class="btn btn-success" style="float: right;"><img src="{% static "assets/images/glyphicons_free/glyphicons/png/glyphicons-218-circle-arrow-right.png" %}" alt="next"> Next</a>
+                    <hr>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Addvertise -->
+        <div class="col-md-3">
+            <hr>
+            <h4 class="text-center text-success">Advertisements</h4>
+            <hr>
+        </div>
+    </div>
+{% endblock main_content %}

@@ -1,0 +1,38 @@
+{% extends "../base/base.html" %}
+{% load static %}
+{% block title %}প্রশ্নোত্তর{% endblock title %}
+{% block main_content %}
+    <div class="row">
+        <h4 class="text-success" style="text-align:center; margin:auto;">প্রোগ্রামিং বিষয়ক কিছু সাধারণ প্রশ্ন এবং তোমাদের করা প্রশ্নগুলো ও তাদের উত্তরগুলো নিয়ে সাজানো হয়েছে
+            এই অংশটি।  <hr/>
+        </h4>
+        <div class="col-md-9">
+            <!-- replace with python code -->
+        {% if warning %}
+            <h5 class="text-success text-center">{{ warning }}</h5>
+        {% elif single %}
+            <h5 style="color:green;"><img src="{% static "assets/images/glyphicons_free/glyphicons/png/glyphicons-155-more-windows.png" %}" alt=""> {{ questions.question_text }}</h5>
+            <p><span style="color:green;"><img src="{% static "assets/images/glyphicons_free/glyphicons/png/glyphicons-346-hand-right.png" %}" alt=""> <b>Answer:</b></span> {{ questions.question_answer }}</p>
+        {% else %}
+            {% for question in questions %}
+                <h5 style="color:green;"><img src="{% static "assets/images/glyphicons_free/glyphicons/png/glyphicons-155-more-windows.png" %}" alt=""> {{ question.question_text }}</h5>
+                <p><span style="color:green;"><img src="{% static "assets/images/glyphicons_free/glyphicons/png/glyphicons-346-hand-right.png" %}" alt=""> <b>Answer:</b></span> {{ question.question_answer | safe }}</p>
+            {% endfor %}
+        {% endif %}
+        </div>
+        <div class="col-md-3">
+            <div class="card mycard">
+                <img class="card-img-top img-fluid rounded-circle" src="{% static 'assets/images/questions/qa.png' %}" alt="প্রশ্নোত্তর">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-success" style="background-color: #f1f1f1; padding: 8px;">প্রশ্নোত্তর</h5>
+                    <p class="card-text text-center">তোমার মনেও কি রয়েছে হাজারো প্রশ্ন? তাহলে দেরি কেন? প্রশ্নগুলো পাঠিয়ে দাও আমার কাছে। তোমার প্রশ্নের উত্তর
+                        প্রকাশ হবে এই পাতায়!!
+                    </p>
+                    <a href="/questions/askquestion/" class="btn btn-success">তোমার প্রশ্ন</a>
+                </div>
+            </div>
+
+            <!-- Add code here -->
+        </div>
+    </div>
+{% endblock main_content %}

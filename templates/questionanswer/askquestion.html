@@ -1,0 +1,35 @@
+{% extends "../base/base.html" %}
+{% load static %}
+{% block title %}প্রশ্নোত্তর{% endblock title %}
+{% block main_content %}
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6 qa-block">
+            <h2 class="text-center text-success">Contact</h2>
+            <form action="/questions/askquestion/" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                            <input class="form-control" id="email" name="email" placeholder="name@example.com" type="email" required>
+                    </div>
+                </div>
+
+                <textarea class="form-control" id="comments" name="comments" placeholder="Question or comments" rows="7"></textarea><br>
+                <div class="row text-center">
+                    <div class="col-sm-12 form-group">
+                        <button class="btn btn-success" type="submit">Send</button>
+                    </div>
+                    <div class="col-sm-12">
+                        {% if message %}
+                        <span class="text-success text-center">{{ message }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+{% endblock main_content %}

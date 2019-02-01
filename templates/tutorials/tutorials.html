@@ -1,0 +1,32 @@
+{% extends "../base/base.html" %}
+{% load static %}
+{% block title %}টিউটোরিয়াল{% endblock title %}
+{% block main_content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 class="text-success text-center">টিউটোরিয়াল লাইব্রেরী</h4>
+            <hr/>
+        </div>
+    </div>
+
+    <!-- replace with python code -->
+    <div class="row">
+        {% if warning %}
+            <h5 class="text-primary text-center">{{ warning }}</h5>
+
+        {% else %}
+            {% for tutorial in tutorial_list %}
+        <div class="col-sm-6 col-md-4 col-lg-4">
+            <div class="card mycard">
+                <img class="card-img-top img-fluid rounded-circle" src="{{ MEDIA_URL }}{{ tutorial.thumbnail.url }}" alt="{{ MEDIA_URL }}{{ tutorial.thumbnail }}">
+                <div class="card-body text-center">
+                    <h4 class="card-title text-success" style="background-color: #f1f1f1;  padding: 8px;">{{ tutorial.language_name_bn }}</h4>
+                    <p class="card-text">{{ tutorial.short_description }}</p>
+                    <a href="/tutorials/{{ tutorial.language_name_en }}/" class="btn btn-success">শেখা শুরু করুন</a>
+                </div>
+            </div>
+        </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock main_content %}
